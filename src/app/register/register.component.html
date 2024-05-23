@@ -1,0 +1,22 @@
+<div class="grid">
+    <form (ngSubmit)="onSubmit()" class="form register">
+      <div class="form__field">
+        <label for="login"><span class="hidden">Nick</span></label>
+        <input id="login" type="text" [(ngModel)]="login" name="login" class="form__input" placeholder="Nick" required>
+      </div>
+      <div class="form__field">
+        <label for="password"><span class="hidden">Hasło</span></label>
+        <input id="password" type="password" [(ngModel)]="password" name="password" class="form__input" placeholder="Hasło" required>
+      </div>
+      <div class="form__field">
+        <label for="age"><span class="hidden">Wiek</span></label>
+        <input id="age" type="number" [(ngModel)]="age" name="age" class="form__input" placeholder="Wiek" required>
+      </div>
+      <div class="form__field">
+        <input type="submit" value="Zarejestruj się!">
+      </div>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </form>
+    <p class="text--center">Jesteś już zarejestrowany? <a [routerLink]="['/login']">Zaloguj się!</a></p>
+  </div>
+  
