@@ -6,8 +6,8 @@
     <div class="lottery"> 
         <div id="unbox-area">
             <div class="arrow-down"></div>
-            <div id="cardList">
-                <div *ngFor="let skin of skins" class="skin" [attr.data-skinId]="skin.Id">
+            <div #cardList id="cardList">
+                <div  [style.background-color]="skin.color" *ngFor="let skin of cardListSkins" id="itemNumber{{skin.itemNumber}}" class="card" [attr.data-rarity]="skin.rarity" [attr.data-skinId]="skin.Id">
                     <div>{{ skin.Name }}</div>
                     <div class="box">
                         <img [src]="skin.img" alt="Skin">
@@ -15,11 +15,17 @@
                 </div>
             </div>
         </div>
-        <button (click)="openCase1()" id="openCase" class="openCase" role="button"><span class="text">Open</span></button>
+        <button (click)="openCase()" [disabled]="czyLosuje" id="openCase" class="openCase" role="button"><span class="text">Open</span></button>
         <div id="cena">5 zł</div>
     </div>
 
     <div id="bronie" class="bronie">
+        <div *ngFor="let skin of skins" class="skin" [attr.data-skinId]="skin.Id">
+            <div>{{ skin.Name }}</div>
+            <div class="box">
+                <img [src]="skin.img" alt="Skin">
+            </div>
+        </div>
     </div>
 </div>
 
