@@ -91,6 +91,10 @@ class DatabaseConnector {
     }
 }
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: X-Requested-With,Authorization,Content-Type');
+
 $data = json_decode(file_get_contents('php://input'), true);
 $return = ["success" => false];
 $dbConnector = new DatabaseConnector();
@@ -101,12 +105,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $player_id = $data['player_id'];
             
             $inventory = $dbConnector->fetchInventory($player_id);
-            foreach ($inventory as $item) {
-                $transaction_id = $item["transaction_id"]; 
-                $skin = $item["skin"];
-                $skin_id = $skin["Id"];
-                echo '<div class="gun">'. htmlspecialchars($skin["Name"]). '<div class="box"><img src="'. htmlspecialchars($skin["img"]). '"></img><input type="checkbox" class="checkbox" data-transaction-id="'. $transaction_id .'" data-skin-id="'.$skin_id.'" role="checkbox"> <button id="sell" class="sell" data-transaction-id="'. $transaction_id .'" data-skin-id="'.$skin_id.'" role="button">Sprzedaj</button>'. '</div></div>'; // Escape HTML characters
-            }
+
+            echo json_encode($inventory);
         } else {
             echo json_encode(array("message" => "Nie wszystkie wymagane parametry zostały przesłane."));
         }

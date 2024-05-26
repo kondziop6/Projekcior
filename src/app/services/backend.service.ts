@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -22,20 +23,11 @@ export class BackendService {
         return this.http.post(`${this.apiUrl}/cases.php`, body, { headers });
     }
 
-    private createAuthHeaders(): HttpHeaders {
-        const token = this.getCookie('token');
-        return new HttpHeaders({ Authorization: `Bearer ${token}` });
-    }
-
-    private getCookie(name: string): string {
-        const nameEQ = name + '=';
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0)
-                return c.substring(nameEQ.length, c.length);
-        }
-        return '';
+    sellSkin(playerId: number, transactionId: number): Observable<any> {
+        return this.http.post(environment.apiUrl + '/inventory.php', {
+            action: 'delete',
+            player_id: playerId,
+            transaction_id: transactionId,
+        });
     }
 }

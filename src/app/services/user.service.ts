@@ -13,18 +13,14 @@ export class UserService {
         return this.http.get<any>(environment.apiUrl + '/getAccountInfo.php');
     }
 
-    getInventory(player_id: string): Observable<string> {
-        return this.http.post(
-            environment.apiUrl + '/inventory.php',
-            {
-                player_id,
-                action: 'fetch',
-            },
-            { responseType: 'text' }
-        );
+    getInventory(player_id: string): Observable<any> {
+        return this.http.post(environment.apiUrl + '/inventory.php', {
+            player_id,
+            action: 'fetch',
+        });
     }
-    
+
     getToken() {
-        return localStorage.getItem("token");
+        return localStorage.getItem('token');
     }
 }

@@ -4,7 +4,16 @@
         <div id="nick">{{userData?.Nick}}</div>
         <div id="money">{{userData?.money}}</div>
     </div>
-    <div [innerHTML]="inventory" id="bronie"></div>
+    <div id="bronie">
+        <div *ngFor="let box of inventory" class="gun">
+            {{box.skin.Name}}
+            <div class="box">
+                <img src="{{box.skin.img}}" alt="">
+                <input type="checkbox" class="checkbox" [attr.transaction-id]="box.transaction_id" [attr.skin-id]="box.skin.Id" role="checkbox">
+                <button (click)="sellSkin(box.transaction_id)" id="sell" class="sell" [attr.transaction-id]="box.transaction_id" [attr.skin-id]="box.skin.Id" role="button">Sprzedaj</button>
+            </div>
+        </div>
+    </div>
     <button id="upgradeButton" style="display: none" (click)="upgradeSkins()">
         Upgrade
     </button>
