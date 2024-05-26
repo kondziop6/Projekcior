@@ -18,9 +18,7 @@ export class AuthService {
             .pipe(
                 map((response) => {
                     if (response.success && response.token) {
-                        document.cookie = `token=${
-                            response.token
-                        }; path=/; max-age=${7 * 24 * 60 * 60}`;
+                        localStorage.setItem('token', response.token);
                     }
 
                     return response;
@@ -40,9 +38,7 @@ export class AuthService {
             .pipe(
                 map((response) => {
                     if (response.success && response.token) {
-                        document.cookie = `token=${
-                            response.token
-                        }; path=/; max-age=${7 * 24 * 60 * 60}`;
+                        localStorage.setItem('token', response.token);
                     }
 
                     return response;
@@ -50,21 +46,16 @@ export class AuthService {
             );
     }
 
-    logout(): Observable<any> {
-        const token = this.getCookie('token');
-        localStorage.removeItem('token');
-        return this.http.post<any>('logout.php', { token });
+    isLoggedIn(): boolean {
+        return localStorage.getItem('token') ? true : false;
     }
 
-    private getCookie(name: string): string {
-        const nameEQ = name + '=';
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0)
-                return c.substring(nameEQ.length, c.length);
-        }
-        return '';
+    getToken(): string {
+        return localStorage.getItem('token') ?? '';
+    }
+
+    logout(): Observable<any> {
+        localStorage.removeItem('token');
+        return this.http.post<any>(environment.apiUrl + '/logout.php', {});
     }
 }

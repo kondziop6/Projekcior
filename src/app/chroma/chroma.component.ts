@@ -263,15 +263,15 @@ export class ChromaComponent implements OnInit {
 
             var rarity = element.getAttribute('data-rarity');
             var skinName = this.skins_table[rarity];
-            var skinId = element.getAttribute('skinId');
+            var skinId = element.getAttribute('data-skinid');
 
-            // this.main(skinName, rarity, skinId);
+            this.main(skinName, rarity, skinId);
             console.log('Dostałeś' + skinName + ' skin!');
         };
     }
 
     async main(skinName: any, rarity: any, skinId: any) {
-        this.http.post('localhost:1337/getAccountInfo.php', {}).subscribe({
+        this.http.post(environment.apiUrl + '/getAccountInfo.php', {}).subscribe({
             next: (data: any) => {
                 var data_send = {
                     player_id: data['Id'],
@@ -279,11 +279,10 @@ export class ChromaComponent implements OnInit {
                     skin_id: skinId,
                     rarity: rarity,
                     amount: 1,
-                    // img: this.skinId.innerHTML,
                 };
 
                 this.http
-                    .post('localhost:1337/cases.php', { data_send })
+                    .post(environment.apiUrl + '/cases.php', { ...data_send })
                     .subscribe({
                         next: (response) => {
                             console.log(response);

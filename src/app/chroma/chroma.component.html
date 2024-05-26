@@ -7,7 +7,7 @@
         <div id="unbox-area">
             <div class="arrow-down"></div>
             <div #cardList id="cardList">
-                <div  [style.background-color]="skin.color" *ngFor="let skin of cardListSkins" id="itemNumber{{skin.itemNumber}}" class="card" [attr.data-rarity]="skin.rarity" [attr.data-skinId]="skin.Id">
+                <div  [style.background-color]="skin.color" *ngFor="let skin of cardListSkins" id="itemNumber{{skin.itemNumber}}" class="card" [attr.data-rarity]="skin.rarity" [attr.data-skinid]="skin.idskin">
                     <div>{{ skin.Name }}</div>
                     <div class="box">
                         <img [src]="skin.img" alt="Skin">

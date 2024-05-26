@@ -10,10 +10,7 @@ export class UserService {
     constructor(private http: HttpClient) {}
 
     getAccountInfo(): Observable<any> {
-        const token = this.getCookie('token');
-        return this.http.get<any>(environment.apiUrl + '/getAccountInfo.php', {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+        return this.http.get<any>(environment.apiUrl + '/getAccountInfo.php');
     }
 
     getInventory(player_id: string): Observable<string> {
@@ -28,18 +25,6 @@ export class UserService {
     }
     
     getToken() {
-        return this.getCookie("token");
-    }
-
-    private getCookie(name: string): string {
-        const nameEQ = name + '=';
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0)
-                return c.substring(nameEQ.length, c.length);
-        }
-        return '';
+        return localStorage.getItem("token");
     }
 }
