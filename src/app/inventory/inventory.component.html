@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="header">
+        <a routerLink="/" id="back">Powrót</a>
+        <div id="nick">{{userData?.Nick}}</div>
+        <div id="money">{{userData?.money}}</div>
+    </div>
+    <div [innerHTML]="inventory" id="bronie"></div>
+    <button id="upgradeButton" style="display: none" (click)="upgradeSkins()">
+        Upgrade
+    </button>
+</div>

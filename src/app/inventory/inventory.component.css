@@ -1,0 +1,34 @@
+img {
+    width: 200px;
+}
+
+.gun {
+    background-color: #0a0a0a;
+    color: #fff;
+    padding: 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 280px;
+    height: 280px;
+    float: left;
+    position: relative;
+}
+
+.checkbox {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sell {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
